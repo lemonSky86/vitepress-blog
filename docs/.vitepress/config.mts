@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/vitepress-blog/', // 项目部署的基础路径
   // 站点级选项
   title: "FSYML", // 网站标题
   description: "A VitePress Site", // 网站描述
