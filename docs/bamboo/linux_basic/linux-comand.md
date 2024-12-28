@@ -325,3 +325,252 @@ scp /home/grid/package/LINUX.X64_193000_grid_home.zip grid@10.159.42.211:/home/g
 ```
 
 ## 磁盘空间相关
+
+### 查看磁盘空间
+
+命令格式： `df [选项] [文件或目录]`
+
+```powershell
+# df 命令用于查看磁盘空间使用情况
+## 查看磁盘空间使用情况
+> df -h
+## 查看磁盘剩余空间,会列出所有文件系统的磁盘空间使用情况
+> df -hl
+
+# 选项
+-a    # 显示所有文件系统的磁盘空间使用情况；
+-h    # 查看每个根路径的分区大小(只查根目录)；
+-i    # 显示每个文件系统的 inode 数量；
+-k    # 以 KB 为单位显示磁盘空间使用情况；
+-m    # 以 MB 为单位显示磁盘空间使用情况；
+-t    # 显示每个文件系统的类型；
+-T    # 显示每个文件系统的类型和挂载点；
+-x    # 显示每个文件系统的磁盘空间使用情况，不包括已挂载的文件系统；
+```
+
+命令格式： `du [选项] [文件或目录]`
+
+```powershell
+# du 命令用于查看文件或目录的磁盘空间使用情况
+## 查看指定路径下磁盘空间使用情况
+> du -h /home/grid/package
+## 查看指定路径的大小
+> du -sh /home/grid/package
+## 查看路径下所有文件的大小
+> du -sm /home/grid/package
+
+# 选项
+-a    # 显示所有文件和目录的磁盘空间使用情况；
+-h    # 以人类可读的方式显示磁盘空间使用情况；
+-s    # 显示指定文件或目录的磁盘空间使用情况；
+```
+
+## 防火墙相关
+
+### 查看防火墙状态
+
+命令格式： `firewall-cmd [选项]`
+
+```powershell
+# firewall-cmd 命令用于管理和配置防火墙
+## 查看防火墙状态
+> firewall-cmd --state
+# 选项
+--state    # 查看防火墙状态；
+```
+
+### 查看防火墙规则
+
+命令格式： `firewall-cmd [选项]`
+
+```powershell
+# firewall-cmd 命令用于管理和配置防火墙
+## 查看防火墙规则
+> firewall-cmd --list-all
+```
+
+### 查看指定端口是否开放
+
+命令格式： `firewall-cmd [选项]`
+
+```powershell
+# firewall-cmd 命令用于管理和配置防火墙
+## 查看端口是否开放
+> firewall-cmd --zone=public --query-port=80/tcp
+```
+
+### 开放指定端口
+
+命令格式： `firewall-cmd [选项]`
+
+```powershell
+# firewall-cmd 命令用于管理和配置防火墙
+## 开放端口
+> firewall-cmd --zone=public --add-port=80/tcp --permanent
+## 重新加载防火墙配置
+> firewall-cmd --reload
+```
+
+::: tip
+开放端口后，需要重新加载防火墙配置，否则端口不会立即生效。一般情况下，防火墙会在系统重启时自动加载配置。
+:::
+
+### 关闭指定端口
+
+命令格式： `firewall-cmd [选项]`
+
+```powershell
+# firewall-cmd 命令用于管理和配置防火墙
+## 关闭端口
+> firewall-cmd --zone=public --remove-port=80/tcp --permanent
+## 重新加载防火墙配置
+> firewall-cmd --reload
+```
+
+### 关闭防火墙
+
+命令格式： `systemctl [选项]`
+
+```powershell
+# systemctl 命令用于管理和配置系统服务
+## 关闭防火墙, 根据需要选择下次开机不启动或启动防火墙
+> systemctl stop firewalld.service
+## 开机不启动防火墙
+> systemctl disable firewalld.service
+## 开机启动防火墙
+> systemctl enable firewalld.service
+```
+
+## 进程相关
+
+### 查看服务进程
+
+命令格式： `ps [选项]`
+
+```powershell
+# ps 命令用于查看进程
+## 查看 java 服务器进程
+> ps -ef | grep java
+```
+
+### 查看端口占用情况
+
+命令格式： `netstat [选项]`
+
+```powershell
+# netstat 命令用于查看网络连接和端口占用情况
+## 查看端口占用情况
+> netstat -tunlp | grep 8080
+```
+
+### 查看进程状态
+
+命令格式： `top [选项]`
+
+```powershell
+# top 命令用于实时查看进程状态
+## 查看进程状态
+> top
+## 根据进程号查看进程状态
+> top -p 12345
+## 根据进程名查看进程状态
+> top -c java
+## 查看进程内存占用情况
+> top -H -p 12345
+```
+
+### 杀掉进程
+
+命令格式： `kill [选项]`
+
+```powershell
+# kill 命令用于杀掉进程
+## 杀掉进程
+> kill -9 12345
+```
+
+## 网络相关
+
+### 查看网络连接情况
+
+命令格式： `netstat [选项]`
+
+```powershell
+# netstat 命令用于查看网络连接和端口占用情况
+## 查看网络连接情况
+> netstat -tunlp | grep 8080
+```
+
+### 查看网络接口信息
+
+命令格式： `ifconfig [选项]`
+
+```powershell
+# ifconfig 命令用于查看网络接口信息
+## 查看网络接口信息
+> ifconfig eth0
+```
+
+### 查看路由表
+
+命令格式： `route [选项]`
+
+```powershell
+# route 命令用于查看路由表
+## 查看路由表
+> route -n
+```
+
+### 查看 DNS 配置
+
+命令格式： `cat [选项]`
+
+```powershell
+# cat 命令用于查看文件内容
+## 查看 DNS 配置
+> cat /etc/resolv.conf
+```
+
+## 内核相关
+
+### 查看内核版本
+
+命令格式： `uname [选项]`
+
+```powershell
+# uname 命令用于查看内核版本
+## 查看内核版本
+> uname -a
+## 查看 Linux 版本
+> cat /proc/version
+```
+
+### 查看内核参数
+
+命令格式： `sysctl [选项]`
+
+```powershell
+# sysctl 命令用于查看内核参数
+## 查看内核参数
+> sysctl -a
+```
+
+### 查看系统负载
+
+命令格式： `uptime [选项]`
+
+```powershell
+# uptime 命令用于查看系统负载
+## 查看系统负载
+> uptime
+```
+
+### 查看系统内存使用情况
+
+命令格式： `free [选项]`
+
+```powershell
+# free 命令用于查看系统内存使用情况
+## 查看系统内存使用情况
+> free -m 
+```
